@@ -33,6 +33,10 @@ def load_configuration():
         'joystick_id': config.getint('Joystick', 'joystick_id'),
         'invert_pitch': config.getboolean('Joystick', 'invert_pitch'),
         'deadzone': config.getfloat('Joystick', 'deadzone'),
+        'axis_yaw': config.getint('Joystick', 'axis_yaw'),
+        'axis_pitch': config.getint('Joystick', 'axis_pitch'),
+        'axis_roll': config.getint('Joystick', 'axis_roll'),
+        'axis_thrust': config.getint('Joystick', 'axis_thrust'),
     }
     return settings
 
