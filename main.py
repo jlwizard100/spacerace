@@ -1,6 +1,7 @@
 import configparser
+import json
 import ast
-from physics import Spaceship
+from physics import Spaceship, Asteroid
 import time
 
 # This script demonstrates how to read the settings from config.ini.
@@ -78,6 +79,31 @@ def main():
     except (FileNotFoundError, configparser.Error) as e:
         print(f"Could not load or parse config.ini: {e}")
         print("Using default values for demonstration.")
+
+    # Load the course from course.json
+    asteroids_data = []
+    try:
+        with open("course.json", 'r') as f:
+            course_data = json.load(f)
+            asteroids_data = course_data.get("asteroids", [])
+            print(f"--- Loaded course '{course_data.get('course_name')}' with {len(asteroids_data)} asteroids ---")
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Could not load or parse course.json: {e}")
+        print("Proceeding without any asteroids.")
+
+    # Create Asteroid objects from the loaded data
+    scene_asteroids = [
+        Asteroid(
+            model_id=data.get('model_id'),
+            position=data.get('position'),
+            orientation=data.get('orientation'),
+            size=data.get('size'),
+            angular_velocity=data.get('angular_velocity')
+        )
+        for data in asteroids_data
+    ]
+    if scene_asteroids:
+        print(f"--- Created {len(scene_asteroids)} asteroid objects from course data. ---")
 
     print("\n--- Physics Module Demonstration ---")
 

@@ -40,8 +40,6 @@ class Spaceship:
         self.mass = mass  # in kg
 
         # For simplicity, we'll use a simplified moment of inertia.
-        # This assumes the ship is roughly symmetrical.
-        # These values determine how fast the ship rotates in each axis for a given torque.
         self.inertia_tensor = [1000.0, 1000.0, 1000.0]
 
         # We will accumulate forces and torques over a frame before updating.
@@ -104,3 +102,20 @@ class Spaceship:
         # Reset accumulators for the next frame
         self.total_force = [0.0, 0.0, 0.0]
         self.total_torque = [0.0, 0.0, 0.0]
+
+
+class Asteroid:
+    """
+    Represents a single asteroid in the game world. Primarily a data container.
+    """
+    def __init__(self, model_id, position, orientation, size, angular_velocity):
+        self.model_id = model_id
+        self.position = position
+        self.orientation = orientation  # Stored as a quaternion [w, x, y, z]
+        self.size = size
+        self.angular_velocity = angular_velocity  # Stored as a vector [x, y, z]
+
+    def __repr__(self):
+        return (
+            f"Asteroid(model='{self.model_id}', pos={self.position}, size={self.size})"
+        )
