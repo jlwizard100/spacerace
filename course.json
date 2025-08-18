@@ -6,7 +6,23 @@
     "height": 2000000.0,
     "depth": 2000000.0
   },
-  "race_gates": [],
+  "race_gates": [
+    {
+      "gate_number": 1,
+      "position": [
+        1465.0,
+        1392.5,
+        4752.5
+      ],
+      "orientation": [
+        0.9978227904992119,
+        0.0,
+        0.0,
+        -0.0659520944350225
+      ],
+      "size": 800
+    }
+  ],
   "asteroids": [
     {
       "model_id": "asteroid_jagged_1",
