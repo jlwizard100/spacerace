@@ -70,7 +70,7 @@ def main():
 
     camera = DesignerCamera()
 
-    boundary_size = 20000.0
+    boundary_size = 2000000.0
     boundary_edges = [(0,1),(1,2),(2,3),(3,0), (4,5),(5,6),(6,7),(7,4), (0,4),(1,5),(2,6),(3,7)]
 
     grid_size = 10000; grid_step = 500; grid_verts = []
