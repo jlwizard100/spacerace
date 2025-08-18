@@ -70,6 +70,7 @@ def main():
     """
     Main function to load configuration and demonstrate the physics module.
     """
+    settings = {}
     try:
         settings = load_configuration()
         print("--- Spacerace Configuration Loaded ---")
