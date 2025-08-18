@@ -108,6 +108,10 @@ def draw_asteroid(screen, asteroid, camera):
 
 def draw_gate(screen, gate, camera):
     """Draws a gate's wireframe model."""
-    # Green for active, red for passed
-    color = (0, 255, 0) if not gate.is_passed else (255, 0, 0)
+    color = (0, 100, 255) # Default blue for pending gates
+    if gate.is_passed:
+        color = (255, 0, 0) # Red for passed
+    elif hasattr(gate, 'is_next') and gate.is_next:
+        color = (0, 255, 0) # Green for the next target gate
+
     draw_wireframe_object(screen, camera, gate.position, gate.orientation, gate.vertices, gate.edges, color)
