@@ -1,9 +1,24 @@
 import configparser
+import ast
 from physics import Spaceship
 import time
 
 # This script demonstrates how to read the settings from config.ini.
 # You can adapt this code to load the configuration in your game.
+
+def _parse_value_with_units(value_str):
+    """
+    Strips common units ('kg', 'm') from a string and returns the numerical part.
+    Returns an int or float.
+    """
+    s = value_str.lower().strip().replace("kg", "").replace("m", "")
+    try:
+        if '.' in s:
+            return float(s)
+        return int(s)
+    except ValueError:
+        # Return 0 or raise an error if parsing fails
+        return 0
 
 def load_configuration():
     """
@@ -23,13 +38,21 @@ def load_configuration():
         'fullscreen': config.getboolean('Graphics', 'fullscreen'),
         'fov': config.getint('Graphics', 'fov'),
 
+        # ShipConfig Settings
+        'ship_weight': _parse_value_with_units(config.get('ShipConfig', 'Ship_weight')),
+        'ship_length': _parse_value_with_units(config.get('ShipConfig', 'Ship_length')),
+        'ship_width': _parse_value_with_units(config.get('ShipConfig', 'Ship_width')),
+        'starting_vector': list(ast.literal_eval(config.get('ShipConfig', 'Starting_vector'))),
+
         # Game Settings
         'mouse_sensitivity': config.getfloat('Game', 'mouse_sensitivity'),
         'invert_y_axis': config.getboolean('Game', 'invert_y_axis'),
 
         # Physics Settings
         'gravity_enabled': config.getboolean('Physics', 'gravity_enabled'),
-        'max_velocity': config.getint('Physics', 'max_velocity'),
+        'max_forward_thruster': config.getint('Physics', 'Max_forward_thruster'),
+        'max_reverse_thruster': config.getint('Physics', 'Max_reverse_thruster'),
+        'max_steering_thruster': config.getint('Physics', 'Max_steering_thruster'),
 
         # Joystick Settings
         'joystick_id': config.getint('Joystick', 'joystick_id'),
@@ -58,8 +81,11 @@ def main():
 
     print("\n--- Physics Module Demonstration ---")
 
-    # 1. Create a spaceship instance
-    ship = Spaceship(mass=1000) # 1000 kg
+    # 1. Create a spaceship instance using settings from config.ini
+    ship = Spaceship(
+        mass=settings.get('ship_weight', 1000),
+        position=settings.get('starting_vector', [0.0, 0.0, 0.0])
+    )
     print(f"Initial state: {ship}")
 
     # 2. Define simulation parameters
@@ -67,8 +93,9 @@ def main():
     delta_time = 1.0         # second per step
     steps = int(simulation_duration / delta_time)
 
-    # 3. Define forces and torques to apply
-    forward_thrust = [1000, 0, 0] # 1000 Newtons of force along the X-axis
+    # 3. Define forces and torques to apply from config settings
+    forward_thrust = [settings.get('max_forward_thruster', 1000), 0, 0]
+    # For demonstration, we'll still use a hardcoded yaw torque
     yaw_torque = [0, 0, 500]       # 500 Nm of torque around the Z-axis (yaw)
 
     # 4. Run the simulation loop
