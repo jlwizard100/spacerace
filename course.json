@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "course_name": "Designer Course",
+  "boundaries": {
+    "width": 2000000.0,
+    "height": 2000000.0,
+    "depth": 2000000.0
+  },
+  "race_gates": [
+    {
+      "gate_number": 1,
+      "position": [
+        1465.0,
+        1392.5,
+        4752.5
+      ],
+      "orientation": [
+        0.9978227904992119,
+        0.0,
+        0.0,
+        -0.0659520944350225
+      ],
+      "size": 800
+    }
+  ],
+  "asteroids": [
+    {
+      "model_id": "asteroid_jagged_1",
+      "position": [
+        826.5,
+        0.0,
+        0.0
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "size": 200,
+      "angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "model_id": "asteroid_jagged_1",
+      "position": [
+        0.0,
+        0.0,
+        3376.5
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "size": 200,
+      "angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}
